@@ -5,20 +5,19 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    tools:context=".ExperienceActivity"
     android:orientation="vertical"
-    tools:context=".EducationActivity">
-    <!-- EditText for entering the university name -->
+    android:padding="16dp">
     <EditText
-        android:id="@+id/etUniversity"
+        android:id="@+id/etOrganization"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/university"
+        android:hint="@string/organization"
         android:layout_marginBottom="16dp" />
 
     <!-- EditText for entering the dates attended -->
     <EditText
-        android:id="@+id/etEducationDatesAttendedFrom"
+        android:id="@+id/etDatesAttendedFrom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/datesattendedfrom"
@@ -26,7 +25,7 @@
         android:focusable="false"
         android:clickable="true" />
     <EditText
-        android:id="@+id/etEducationDatesAttendedTo"
+        android:id="@+id/etDatesAttendedTo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/datesattendedto"
@@ -34,9 +33,9 @@
         android:focusable="false"
         android:clickable="true" />
 
-    <!-- Button to submit the education data -->
+    <!-- Button to submit the experience data -->
     <Button
-        android:id="@+id/btnSubmitEducation"
+        android:id="@+id/btnSubmitExperience"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/submit"

@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnProfilePicture, btnPersonalDetails,btnSummary , btnEducation, btnExperience,btnCertifications, btnReferences ;
     private Uri selectedProfilePictureUri; // Variable to store the result
 
-    private String email, phoneNumber,summary,name,university,datesAttended;  // Variables to store the email and phone number
+    private String email, phoneNumber,summary,name,university,educationDatesAttendedFrom,educationDatesAttendedTo,organizationDatesAttendedFrom,organizationDatesAttendedTo,organization,certificationName;  // Variables to store the email and phone number
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,9 +104,11 @@ public class MainActivity extends AppCompatActivity {
                     {
                         Intent dataIntent = result.getData();
                         university = dataIntent.getStringExtra("university");
-                        datesAttended= dataIntent.getStringExtra("datesAttended");
+                        educationDatesAttendedFrom= dataIntent.getStringExtra("educationDatesAttendedFrom");
+                        educationDatesAttendedTo= dataIntent.getStringExtra("educationDatesAttendedTo");
 
-                        Toast.makeText(this, datesAttended+"\n"+university+"\n", Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(this, educationDatesAttendedFrom+"\n"+educationDatesAttendedTo+"\n"+university+"\n", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -121,10 +123,11 @@ public class MainActivity extends AppCompatActivity {
                     else if(result.getResultCode() == RESULT_OK && result.getData()!=null)
                     {
                         Intent dataIntent = result.getData();
-                        email = dataIntent.getStringExtra("email");
-                        phoneNumber = dataIntent.getStringExtra("phoneNumber");
+                        organization = dataIntent.getStringExtra("organization");
+                        organizationDatesAttendedFrom = dataIntent.getStringExtra("datesAttendedFrom");
+                        organizationDatesAttendedTo = dataIntent.getStringExtra("datesAttendedTo");
 
-                        Toast.makeText(this, email+"\n"+phoneNumber+"\n", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, organizationDatesAttendedFrom+"\n" + organizationDatesAttendedTo, Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -139,10 +142,9 @@ public class MainActivity extends AppCompatActivity {
                     else if(result.getResultCode() == RESULT_OK && result.getData()!=null)
                     {
                         Intent dataIntent = result.getData();
-                        email = dataIntent.getStringExtra("email");
-                        phoneNumber = dataIntent.getStringExtra("phoneNumber");
+                        certificationName = dataIntent.getStringExtra("certificationName");
 
-                        Toast.makeText(this, email+"\n"+phoneNumber+"\n", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, certificationName+"\n", Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -170,16 +172,16 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, EducationActivity.class);
             educationLauncher.launch(intent);
         });
+
+        btnExperience.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ExperienceActivity.class);
+            experienceLauncher.launch(intent);
+        });
 //
-//        btnExperience.setOnClickListener(v -> {
-//            Intent intent = new Intent(MainActivity.this, ExperienceActivity.class);
-//            experienceLauncher.launch(intent);
-//        });
-//
-//        btnCertifications.setOnClickListener(v -> {
-//            Intent intent = new Intent(MainActivity.this, CertificationsActivity.class);
-//            certificationsLauncher.launch(intent);
-//        });
+        btnCertifications.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, CertificationsActivity.class);
+            certificationsLauncher.launch(intent);
+        });
 //
 //
     }

@@ -1,6 +1,5 @@
 package com.example.cvbuilder;
 
-import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,54 +18,53 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class EducationActivity extends AppCompatActivity {
-    private EditText etUniversity, etEducationDatesAttendedFrom, etEducationDatesAttendedTo;
-    private Button btnSubmitEducation;
+public class ExperienceActivity extends AppCompatActivity {
 
-    @SuppressLint("MissingInflatedId")
+    private EditText etOrganization, etDatesAttendedFrom, etDatesAttendedTo;
+    private Button btnSubmitExperience;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_education);
-
+        setContentView(R.layout.activity_experience);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        // Initialize the EditTexts and Button
-        etUniversity = findViewById(R.id.etUniversity);
-        etEducationDatesAttendedFrom = findViewById(R.id.etEducationDatesAttendedFrom);
-        etEducationDatesAttendedTo = findViewById(R.id.etEducationDatesAttendedTo);
-        btnSubmitEducation = findViewById(R.id.btnSubmitEducation);
+        // Initialize the views
+        etOrganization = findViewById(R.id.etOrganization);
+        etDatesAttendedFrom = findViewById(R.id.etDatesAttendedFrom);
+        etDatesAttendedTo = findViewById(R.id.etDatesAttendedTo);
+        btnSubmitExperience = findViewById(R.id.btnSubmitExperience);
 
         // Set OnClickListeners for both Date fields to open the DatePickerDialog
-        etEducationDatesAttendedFrom.setOnClickListener(v -> showDatePickerDialog(etEducationDatesAttendedFrom));
-        etEducationDatesAttendedTo.setOnClickListener(v -> showDatePickerDialog(etEducationDatesAttendedTo));
+        etDatesAttendedFrom.setOnClickListener(v -> showDatePickerDialog(etDatesAttendedFrom));
+        etDatesAttendedTo.setOnClickListener(v -> showDatePickerDialog(etDatesAttendedTo));
 
         // Set the OnClickListener for the Submit button
-        btnSubmitEducation.setOnClickListener(v -> {
-            // Retrieve the university name and dates attended from EditText
-            String university = etUniversity.getText().toString();
-            String datesAttendedFrom = etEducationDatesAttendedFrom.getText().toString();
-            String datesAttendedTo = etEducationDatesAttendedTo.getText().toString();
+        btnSubmitExperience.setOnClickListener(v -> {
+            // Retrieve the organization name and dates attended from EditText
+            String organization = etOrganization.getText().toString();
+            String datesAttendedFrom = etDatesAttendedFrom.getText().toString();
+            String datesAttendedTo = etDatesAttendedTo.getText().toString();
 
             // Check if the fields are not empty
-            if (!university.isEmpty() && !datesAttendedFrom.isEmpty() && !datesAttendedTo.isEmpty()) {
+            if (!organization.isEmpty() && !datesAttendedFrom.isEmpty() && !datesAttendedTo.isEmpty()) {
                 // Create an Intent to return the result back to MainActivity
                 Intent resultIntent = new Intent();
-                resultIntent.putExtra("university", university);
-                resultIntent.putExtra("educationDatesAttendedFrom", datesAttendedFrom);
-                resultIntent.putExtra("educationDatesAttendedTo", datesAttendedTo);
+                resultIntent.putExtra("organization", organization);
+                resultIntent.putExtra("datesAttendedFrom", datesAttendedFrom);
+                resultIntent.putExtra("datesAttendedTo", datesAttendedTo);
 
                 // Set the result and finish the activity
                 setResult(RESULT_OK, resultIntent);
-                finish(); // Close the EducationActivity
+                finish(); // Close the ExperienceActivity
             } else {
                 // Show a toast if any field is empty
-                Toast.makeText(EducationActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ExperienceActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -80,7 +78,7 @@ public class EducationActivity extends AppCompatActivity {
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         // Create and show DatePickerDialog
-        DatePickerDialog datePickerDialog = new DatePickerDialog(EducationActivity.this, new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(ExperienceActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 // Format the selected date

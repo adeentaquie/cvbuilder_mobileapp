@@ -14,8 +14,10 @@
     <string name="entersummary">Enter Summary</string>
     <string name="name">Enter Your Name</string>
     <string name="university">Enter Your University</string>
-    <string name="datesattended">Enter Dates Attended</string>
+    <string name="datesattendedfrom">Enter Dates Attended From</string>
+    <string name="datesattendedto">Enter Dates Attended To</string>
     <string name="submit">submit</string>
     <string name="preview">Preview Your CV</string>
-
+    <string name="organization">Enter Organization Name</string>
+    <string name="entercertifications">Enter Certification Name</string>
 </resources>
