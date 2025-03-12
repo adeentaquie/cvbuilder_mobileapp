@@ -7,7 +7,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -21,7 +20,6 @@ public class Splash extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_splash);
 
         // Initialize views and animation
@@ -34,8 +32,13 @@ public class Splash extends AppCompatActivity {
             return insets;
         });
 
-        // Start the animation
-        iv_logo.setAnimation(logoanimation);
+        // Ensure ImageView is initialized before setting the animation
+        if (iv_logo != null && logoanimation != null) {
+            iv_logo.startAnimation(logoanimation); // Start the animation
+        } else {
+            // Log an error or handle initialization failure
+            System.out.println("ImageView or Animation is null");
+        }
 
         // Transition to the next screen after a delay
         new Handler().postDelayed(() -> {
@@ -45,7 +48,15 @@ public class Splash extends AppCompatActivity {
     }
 
     private void init() {
-        iv_logo = findViewById(R.id.ivlogo);
-        logoanimation = AnimationUtils.loadAnimation(this, R.anim.logoanimation);
+        iv_logo = findViewById(R.id.iv_logo);  // Initialize the ImageView
+        logoanimation = AnimationUtils.loadAnimation(this, R.anim.logoanimation);  // Load the animation
+
+        // Add checks or logs to confirm if initialization is successful
+        if (iv_logo == null) {
+            System.out.println("iv_logo is null");
+        }
+        if (logoanimation == null) {
+            System.out.println("logoanimation is null");
+        }
     }
 }

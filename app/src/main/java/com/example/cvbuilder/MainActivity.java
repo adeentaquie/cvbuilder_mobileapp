@@ -1,8 +1,12 @@
 package com.example.cvbuilder;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
@@ -22,8 +26,9 @@ public class MainActivity extends AppCompatActivity {
     private ActivityResultLauncher<Intent> referencesLauncher;
 
     Button btnProfilePicture, btnPersonalDetails,btnSummary , btnEducation, btnExperience,btnCertifications, btnReferences ;
+    private Uri selectedProfilePictureUri; // Variable to store the result
 
-
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +45,14 @@ public class MainActivity extends AppCompatActivity {
         profilePictureLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
-                    if (result.getResultCode() == RESULT_OK) {
-                        // Handle the result (data returned from ProfilePictureActivity)
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        // Get the image URI returned from SetProfilePictureActivity
+                        selectedProfilePictureUri = result.getData().getData();
+                        Toast.makeText(this, "Image is Uploaded", Toast.LENGTH_SHORT).show();
+
+                        // Update the profile image in the MainActivity
                     }
+
                 });
 
         personalDetailsLauncher = registerForActivityResult(
@@ -103,31 +113,31 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, PersonalDetailsActivity.class);
             personalDetailsLauncher.launch(intent);
         });
-
-        btnSummary.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, SummaryActivity.class);
-            summaryLauncher.launch(intent);
-        });
-
-        btnEducation.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, EducationActivity.class);
-            educationLauncher.launch(intent);
-        });
-
-        btnExperience.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, ExperienceActivity.class);
-            experienceLauncher.launch(intent);
-        });
-
-        btnCertifications.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, CertificationsActivity.class);
-            certificationsLauncher.launch(intent);
-        });
-
-        btnReferences.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, ReferencesActivity.class);
-            referencesLauncher.launch(intent);
-        });
+//
+//        btnSummary.setOnClickListener(v -> {
+//            Intent intent = new Intent(MainActivity.this, SummaryActivity.class);
+//            summaryLauncher.launch(intent);
+//        });
+//
+//        btnEducation.setOnClickListener(v -> {
+//            Intent intent = new Intent(MainActivity.this, EducationActivity.class);
+//            educationLauncher.launch(intent);
+//        });
+//
+//        btnExperience.setOnClickListener(v -> {
+//            Intent intent = new Intent(MainActivity.this, ExperienceActivity.class);
+//            experienceLauncher.launch(intent);
+//        });
+//
+//        btnCertifications.setOnClickListener(v -> {
+//            Intent intent = new Intent(MainActivity.this, CertificationsActivity.class);
+//            certificationsLauncher.launch(intent);
+//        });
+//
+//        btnReferences.setOnClickListener(v -> {
+//            Intent intent = new Intent(MainActivity.this, ReferencesActivity.class);
+//            referencesLauncher.launch(intent);
+//        });
     }
     private void init(){
          btnProfilePicture = findViewById(R.id.btn_profile_picture);
