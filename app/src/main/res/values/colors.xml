@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="purple">#6A1B9A</color>
+    <color name="button_background_color">#6A1B9A</color>  <!-- Purple -->
+    <!-- Use a shade of purple similar to the one in your image -->
 </resources>
