@@ -20,4 +20,6 @@
     <string name="preview">Preview Your CV</string>
     <string name="organization">Enter Organization Name</string>
     <string name="entercertifications">Enter Certification Name</string>
+    <string name="workexperience">Work Experience</string>
+    <string name="hyphen">-</string>
 </resources>

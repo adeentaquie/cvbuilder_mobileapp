@@ -5,4 +5,8 @@
     <color name="purple">#6A1B9A</color>
     <color name="button_background_color">#6A1B9A</color>  <!-- Purple -->
     <!-- Use a shade of purple similar to the one in your image -->
+    <color name="ll1">#8F9CB6</color>
+    <color name="ll2">#CC7078</color>"
+    <color name="ll3">#18E497</color>"
+    <color name="ll4">#C8C51C</color>"
 </resources>
