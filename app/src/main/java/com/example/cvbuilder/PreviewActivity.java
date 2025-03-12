@@ -5,12 +5,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class PreviewActivity extends AppCompatActivity {
 
@@ -18,8 +22,11 @@ public class PreviewActivity extends AppCompatActivity {
     TextView tvname, tvemail, tvphonenumber, tvsummary, tvuniversity, tveducationdatesattendedfrom,
             tveducationdatesattendedto, tvorganizationdatesattendedfrom, tvorganizationdatesattendedto,
             tvorganization, tvcertification;
-    private Uri profilePictureUri;
-    ImageView profilepicture;
+
+    private ActivityResultLauncher<Intent> profilePictureLauncher;
+    private FloatingActionButton fabAddProfilePic;  // FloatingActionButton to add profile picture
+    private Uri profilePictureUri;  // URI to store the profile picture
+    private ImageView profilepicture;  // ImageView to display the profile picture
 
     // Declare strings to hold data passed through Intent
     private String email, phoneNumber, summary, name, university, educationDatesAttendedFrom, educationDatesAttendedTo,
@@ -28,7 +35,6 @@ public class PreviewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_preview);
 
         // Adjust padding for system bars (status bar, navigation bar)
@@ -40,7 +46,6 @@ public class PreviewActivity extends AppCompatActivity {
 
         // Retrieve data passed through the Intent
         Intent intent = getIntent();
-//        profilePictureUri = Uri.parse(intent.getStringExtra("profilePictureUri"));
         email = intent.getStringExtra("email");
         phoneNumber = intent.getStringExtra("phoneNumber");
         summary = intent.getStringExtra("summary");
@@ -69,10 +74,35 @@ public class PreviewActivity extends AppCompatActivity {
         tvorganization.setText(organization);
         tvcertification.setText(certificationName);
 
-        // Set the profile picture (if URI is provided)
-//        if (profilePictureUri != null) {
-//            profilepicture.setImageURI(profilePictureUri);
-//        }
+        // Initialize profile picture URI
+        String profilePictureUriString = intent.getStringExtra("profilePictureUri");
+        if (profilePictureUriString != null && !profilePictureUriString.isEmpty()) {
+            profilePictureUri = Uri.parse(profilePictureUriString);
+            profilepicture.setImageURI(profilePictureUri);  // Set the profile image if URI exists
+        }
+
+        // Setup FloatingActionButton to add or change profile picture
+        fabAddProfilePic.setOnClickListener(v -> {
+            // Launch the gallery picker to select an image
+            Intent pickImageIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            profilePictureLauncher.launch(pickImageIntent);
+        });
+
+        // Register the ActivityResultLauncher to handle the result of image picking
+        profilePictureLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        // Get the image URI returned from the gallery picker
+                        profilePictureUri = result.getData().getData();
+                        profilepicture.setImageURI(profilePictureUri);  // Set the selected image in the ImageView
+                        Toast.makeText(PreviewActivity.this, "Profile picture updated", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Handle the case where no image was selected (optional)
+                        Toast.makeText(PreviewActivity.this, "No image selected", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
     }
 
     // Initialize all the views
@@ -89,5 +119,6 @@ public class PreviewActivity extends AppCompatActivity {
         tvorganization = findViewById(R.id.tvorganizationname);
         tvcertification = findViewById(R.id.tvcertifications);
         profilepicture = findViewById(R.id.profilepicture);
+        fabAddProfilePic = findViewById(R.id.fabaddprofilepic);  // Initialize the FloatingActionButton
     }
 }

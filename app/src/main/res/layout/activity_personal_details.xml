@@ -9,6 +9,13 @@
     android:padding="16dp"
     tools:context=".PersonalDetailsActivity">
     <EditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/name"
+        android:layout_margin="10dp"
+        android:inputType="text" />
+    <EditText
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,13 +30,7 @@
         android:hint="@string/phonenumber"
         android:layout_margin="10dp"
         android:inputType="phone" />
-    <EditText
-        android:id="@+id/etName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/name"
-        android:layout_margin="10dp"
-        android:inputType="text" />
+
 
     <Button
         android:id="@+id/btnSubmit"

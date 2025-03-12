@@ -19,15 +19,13 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-    private ActivityResultLauncher<Intent> profilePictureLauncher;
     private ActivityResultLauncher<Intent> personalDetailsLauncher;
     private ActivityResultLauncher<Intent> summaryLauncher;
     private ActivityResultLauncher<Intent> educationLauncher;
     private ActivityResultLauncher<Intent> experienceLauncher;
     private ActivityResultLauncher<Intent> certificationsLauncher;
 
-    Button btnProfilePicture, btnPersonalDetails,btnSummary , btnEducation, btnExperience,btnCertifications, btn_preview ;
-    private Uri selectedProfilePictureUri; // Variable to store the result
+    Button  btnPersonalDetails,btnSummary , btnEducation, btnExperience,btnCertifications, btn_preview ;
 
     private String email, phoneNumber,summary,name,university,educationDatesAttendedFrom,educationDatesAttendedTo,organizationDatesAttendedFrom,organizationDatesAttendedTo,organization,certificationName;  // Variables to store the email and phone number
     @SuppressLint("MissingInflatedId")
@@ -44,18 +42,7 @@ public class MainActivity extends AppCompatActivity {
         });
         init();
 
-        profilePictureLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                        // Get the image URI returned from SetProfilePictureActivity
-                        selectedProfilePictureUri = result.getData().getData();
-                        Toast.makeText(this, "Image is Uploaded", Toast.LENGTH_SHORT).show();
-                    } else {
-                        // Handle the case where no image was selected (optional)
-                        Toast.makeText(this, "No image selected", Toast.LENGTH_SHORT).show();
-                    }
-                });
+
 
 
         personalDetailsLauncher = registerForActivityResult(
@@ -151,10 +138,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Set up the onClick listeners for each button to launch the activities
-        btnProfilePicture.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, SetProfilePicture.class);
-            profilePictureLauncher.launch(intent);
-        });
+
 
         btnPersonalDetails.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, PersonalDetailsActivity.class);
@@ -182,28 +166,28 @@ public class MainActivity extends AppCompatActivity {
         });
 //
         btn_preview.setOnClickListener(v -> {
-//            // Check if any required field is null or empty
-//            if (selectedProfilePictureUri == null || email == null || phoneNumber == null || summary == null ||
-//                    name == null || university == null || educationDatesAttendedFrom == null || educationDatesAttendedTo == null ||
-//                    organizationDatesAttendedFrom == null || organizationDatesAttendedTo == null || organization == null ||
-//                    certificationName == null || selectedProfilePictureUri.toString().isEmpty() || email.isEmpty() ||
-//                    phoneNumber.isEmpty() || summary.isEmpty() || name.isEmpty() || university.isEmpty() ||
-//                    educationDatesAttendedFrom.isEmpty() || educationDatesAttendedTo.isEmpty() ||
-//                    organizationDatesAttendedFrom.isEmpty() || organizationDatesAttendedTo.isEmpty() || organization.isEmpty() ||
-//                    certificationName.isEmpty()) {
-//
-//                // Show a Toast message indicating that some data is missing
-//                Toast.makeText(MainActivity.this, "Please fill in all the fields before proceeding!", Toast.LENGTH_SHORT).show();
-//
-//                // Optionally return or do some other action if data is incomplete
-//                return;
-//            }
+            // Check if any required field is null or empty
+            if ( email == null || phoneNumber == null || summary == null ||
+                    name == null || university == null || educationDatesAttendedFrom == null || educationDatesAttendedTo == null ||
+                    organizationDatesAttendedFrom == null || organizationDatesAttendedTo == null || organization == null ||
+                    certificationName == null  || email.isEmpty() ||
+                    phoneNumber.isEmpty() || summary.isEmpty() || name.isEmpty() || university.isEmpty() ||
+                    educationDatesAttendedFrom.isEmpty() || educationDatesAttendedTo.isEmpty() ||
+                    organizationDatesAttendedFrom.isEmpty() || organizationDatesAttendedTo.isEmpty() || organization.isEmpty() ||
+                    certificationName.isEmpty()) {
+
+                // Show a Toast message indicating that some data is missing
+                Toast.makeText(MainActivity.this, "Please fill in all the fields before proceeding!", Toast.LENGTH_SHORT).show();
+
+                // Optionally return or do some other action if data is incomplete
+                return;
+            }
 
             // Create the intent to send the data to PreviewActivity
             Intent intent = new Intent(MainActivity.this, PreviewActivity.class);
 
             // Put all the data into the intent as extras
-//            intent.putExtra("profilePictureUri", selectedProfilePictureUri.toString());
+
             intent.putExtra("email", email);
             intent.putExtra("phoneNumber", phoneNumber);
             intent.putExtra("summary", summary);
@@ -224,7 +208,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void init(){
-         btnProfilePicture = findViewById(R.id.btn_profile_picture);
          btnPersonalDetails = findViewById(R.id.btn_personal_details);
          btnSummary = findViewById(R.id.btn_summary);
          btnEducation = findViewById(R.id.btn_education);
