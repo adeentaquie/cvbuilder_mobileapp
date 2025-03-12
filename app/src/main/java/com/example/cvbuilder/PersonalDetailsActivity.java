@@ -15,7 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class PersonalDetailsActivity extends AppCompatActivity {
-    private EditText etEmail, etPhoneNumber;
+    private EditText etEmail, etPhoneNumber,etName;
     private TextView tv_result;
     private Button btnSubmit;
 
@@ -30,6 +30,7 @@ public class PersonalDetailsActivity extends AppCompatActivity {
             return insets;
 
         });
+        etName=findViewById(R.id.etName);
         etEmail = findViewById(R.id.etEmail);
         etPhoneNumber = findViewById(R.id.etPhoneNumber);
         btnSubmit = findViewById(R.id.btnSubmit);
@@ -40,9 +41,9 @@ public class PersonalDetailsActivity extends AppCompatActivity {
             // Retrieve the email and phone number from EditText
             String email = etEmail.getText().toString();
             String phoneNumber = etPhoneNumber.getText().toString();
-
+            String name=etName.getText().toString();
             // Check if the fields are not empty
-            if (!email.isEmpty() && !phoneNumber.isEmpty()) {
+            if (!email.isEmpty() && !phoneNumber.isEmpty() && !name.isEmpty()) {
                 // Show email in the TextView for confirmation before sending
                 tv_result.setText(email); // Display the email in TextView
 
@@ -52,6 +53,7 @@ public class PersonalDetailsActivity extends AppCompatActivity {
                     Intent resultIntent = new Intent();
                     resultIntent.putExtra("email", email);
                     resultIntent.putExtra("phoneNumber", phoneNumber);
+                    resultIntent.putExtra("name", name);
 
                     // Set the result and finish the activity
                     setResult(RESULT_OK, resultIntent);

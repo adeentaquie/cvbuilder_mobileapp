@@ -16,6 +16,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity {
     private ActivityResultLauncher<Intent> profilePictureLauncher;
     private ActivityResultLauncher<Intent> personalDetailsLauncher;
@@ -23,13 +25,11 @@ public class MainActivity extends AppCompatActivity {
     private ActivityResultLauncher<Intent> educationLauncher;
     private ActivityResultLauncher<Intent> experienceLauncher;
     private ActivityResultLauncher<Intent> certificationsLauncher;
-    private ActivityResultLauncher<Intent> referencesLauncher;
 
     Button btnProfilePicture, btnPersonalDetails,btnSummary , btnEducation, btnExperience,btnCertifications, btnReferences ;
     private Uri selectedProfilePictureUri; // Variable to store the result
 
-    private String email, phoneNumber;  // Variables to store the email and phone number
-
+    private String email, phoneNumber,summary,name,university,datesAttended;  // Variables to store the email and phone number
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +69,9 @@ public class MainActivity extends AppCompatActivity {
                         Intent dataIntent = result.getData();
                         email = dataIntent.getStringExtra("email");
                         phoneNumber = dataIntent.getStringExtra("phoneNumber");
+                        name = dataIntent.getStringExtra("phoneNumber");
 
-                        Toast.makeText(this, email+"\n"+phoneNumber+"\n", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, name+"\n" +  email+"\n"+phoneNumber+"\n", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -85,10 +86,9 @@ public class MainActivity extends AppCompatActivity {
                     else if(result.getResultCode() == RESULT_OK && result.getData()!=null)
                     {
                         Intent dataIntent = result.getData();
-                        email = dataIntent.getStringExtra("email");
-                        phoneNumber = dataIntent.getStringExtra("phoneNumber");
+                        summary = dataIntent.getStringExtra("summary");
 
-                        Toast.makeText(this, email+"\n"+phoneNumber+"\n", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, summary+"\n", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -103,10 +103,10 @@ public class MainActivity extends AppCompatActivity {
                     else if(result.getResultCode() == RESULT_OK && result.getData()!=null)
                     {
                         Intent dataIntent = result.getData();
-                        email = dataIntent.getStringExtra("email");
-                        phoneNumber = dataIntent.getStringExtra("phoneNumber");
+                        university = dataIntent.getStringExtra("university");
+                        datesAttended= dataIntent.getStringExtra("datesAttended");
 
-                        Toast.makeText(this, email+"\n"+phoneNumber+"\n", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, datesAttended+"\n"+university+"\n", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -148,23 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
                 });
 
-        referencesLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if(result.getResultCode() == RESULT_CANCELED)
-                    {
-                        Toast.makeText(this, "Data not entered by user", Toast.LENGTH_SHORT).show();
-                    }
-                    else if(result.getResultCode() == RESULT_OK && result.getData()!=null)
-                    {
-                        Intent dataIntent = result.getData();
-                        email = dataIntent.getStringExtra("email");
-                        phoneNumber = dataIntent.getStringExtra("phoneNumber");
 
-                        Toast.makeText(this, email+"\n"+phoneNumber+"\n", Toast.LENGTH_SHORT).show();
-
-                    }
-                });
 
         // Set up the onClick listeners for each button to launch the activities
         btnProfilePicture.setOnClickListener(v -> {
@@ -177,15 +161,15 @@ public class MainActivity extends AppCompatActivity {
             personalDetailsLauncher.launch(intent);
         });
 //
-//        btnSummary.setOnClickListener(v -> {
-//            Intent intent = new Intent(MainActivity.this, SummaryActivity.class);
-//            summaryLauncher.launch(intent);
-//        });
+        btnSummary.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, Summary.class);
+            summaryLauncher.launch(intent);
+        });
 //
-//        btnEducation.setOnClickListener(v -> {
-//            Intent intent = new Intent(MainActivity.this, EducationActivity.class);
-//            educationLauncher.launch(intent);
-//        });
+        btnEducation.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, EducationActivity.class);
+            educationLauncher.launch(intent);
+        });
 //
 //        btnExperience.setOnClickListener(v -> {
 //            Intent intent = new Intent(MainActivity.this, ExperienceActivity.class);
@@ -197,10 +181,7 @@ public class MainActivity extends AppCompatActivity {
 //            certificationsLauncher.launch(intent);
 //        });
 //
-//        btnReferences.setOnClickListener(v -> {
-//            Intent intent = new Intent(MainActivity.this, ReferencesActivity.class);
-//            referencesLauncher.launch(intent);
-//        });
+//
     }
     private void init(){
          btnProfilePicture = findViewById(R.id.btn_profile_picture);

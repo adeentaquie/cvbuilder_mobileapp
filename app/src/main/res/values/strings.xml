@@ -11,4 +11,11 @@
     <string name="insertimage">Please enter an image by clicking on the image sign</string>
     <string name="email">email</string>
     <string name="phonenumber">phone number</string>
+    <string name="entersummary">Enter Summary</string>
+    <string name="name">Enter Your Name</string>
+    <string name="university">Enter Your University</string>
+    <string name="datesattended">Enter Dates Attended</string>
+    <string name="submit">submit</string>
+    <string name="preview">Preview Your CV</string>
+
 </resources>

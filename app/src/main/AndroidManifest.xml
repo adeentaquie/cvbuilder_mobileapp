@@ -15,9 +15,14 @@
         android:theme="@style/Theme.CVBuilder"
         tools:targetApi="31">
         <activity
-            android:name=".PersonalDetailsActivity"
+            android:name=".EducationActivity"
             android:exported="false" />
-        <!-- SetProfilePicture Activity -->
+        <activity
+            android:name=".Summary"
+            android:exported="false" />
+        <activity
+            android:name=".PersonalDetailsActivity"
+            android:exported="false" /> <!-- SetProfilePicture Activity -->
         <activity
             android:name=".SetProfilePicture"
             android:exported="false" /> <!-- MainActivity -->
