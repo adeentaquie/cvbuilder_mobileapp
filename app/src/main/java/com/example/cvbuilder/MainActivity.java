@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     Button btnProfilePicture, btnPersonalDetails,btnSummary , btnEducation, btnExperience,btnCertifications, btnReferences ;
     private Uri selectedProfilePictureUri; // Variable to store the result
 
+    private String email, phoneNumber;  // Variables to store the email and phone number
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,48 +60,109 @@ public class MainActivity extends AppCompatActivity {
         personalDetailsLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
-                    if (result.getResultCode() == RESULT_OK) {
-                        // Handle the result (data returned from PersonalDetailsActivity)
+                    if(result.getResultCode() == RESULT_CANCELED)
+                    {
+                        Toast.makeText(this, "Data not entered by user", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(result.getResultCode() == RESULT_OK && result.getData()!=null)
+                    {
+                        Intent dataIntent = result.getData();
+                        email = dataIntent.getStringExtra("email");
+                        phoneNumber = dataIntent.getStringExtra("phoneNumber");
+
+                        Toast.makeText(this, email+"\n"+phoneNumber+"\n", Toast.LENGTH_SHORT).show();
+
                     }
                 });
 
         summaryLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
-                    if (result.getResultCode() == RESULT_OK) {
-                        // Handle the result (data returned from SummaryActivity)
+                    if(result.getResultCode() == RESULT_CANCELED)
+                    {
+                        Toast.makeText(this, "Data not entered by user", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(result.getResultCode() == RESULT_OK && result.getData()!=null)
+                    {
+                        Intent dataIntent = result.getData();
+                        email = dataIntent.getStringExtra("email");
+                        phoneNumber = dataIntent.getStringExtra("phoneNumber");
+
+                        Toast.makeText(this, email+"\n"+phoneNumber+"\n", Toast.LENGTH_SHORT).show();
+
                     }
                 });
 
         educationLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
-                    if (result.getResultCode() == RESULT_OK) {
-                        // Handle the result (data returned from EducationActivity)
+                    if(result.getResultCode() == RESULT_CANCELED)
+                    {
+                        Toast.makeText(this, "Data not entered by user", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(result.getResultCode() == RESULT_OK && result.getData()!=null)
+                    {
+                        Intent dataIntent = result.getData();
+                        email = dataIntent.getStringExtra("email");
+                        phoneNumber = dataIntent.getStringExtra("phoneNumber");
+
+                        Toast.makeText(this, email+"\n"+phoneNumber+"\n", Toast.LENGTH_SHORT).show();
+
                     }
                 });
 
         experienceLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
-                    if (result.getResultCode() == RESULT_OK) {
-                        // Handle the result (data returned from ExperienceActivity)
+                    if(result.getResultCode() == RESULT_CANCELED)
+                    {
+                        Toast.makeText(this, "Data not entered by user", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(result.getResultCode() == RESULT_OK && result.getData()!=null)
+                    {
+                        Intent dataIntent = result.getData();
+                        email = dataIntent.getStringExtra("email");
+                        phoneNumber = dataIntent.getStringExtra("phoneNumber");
+
+                        Toast.makeText(this, email+"\n"+phoneNumber+"\n", Toast.LENGTH_SHORT).show();
+
                     }
                 });
 
         certificationsLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
-                    if (result.getResultCode() == RESULT_OK) {
-                        // Handle the result (data returned from CertificationsActivity)
+                    if(result.getResultCode() == RESULT_CANCELED)
+                    {
+                        Toast.makeText(this, "Data not entered by user", Toast.LENGTH_SHORT).show();
                     }
+                    else if(result.getResultCode() == RESULT_OK && result.getData()!=null)
+                    {
+                        Intent dataIntent = result.getData();
+                        email = dataIntent.getStringExtra("email");
+                        phoneNumber = dataIntent.getStringExtra("phoneNumber");
+
+                        Toast.makeText(this, email+"\n"+phoneNumber+"\n", Toast.LENGTH_SHORT).show();
+
+                    }
+
                 });
 
         referencesLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
-                    if (result.getResultCode() == RESULT_OK) {
-                        // Handle the result (data returned from ReferencesActivity)
+                    if(result.getResultCode() == RESULT_CANCELED)
+                    {
+                        Toast.makeText(this, "Data not entered by user", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(result.getResultCode() == RESULT_OK && result.getData()!=null)
+                    {
+                        Intent dataIntent = result.getData();
+                        email = dataIntent.getStringExtra("email");
+                        phoneNumber = dataIntent.getStringExtra("phoneNumber");
+
+                        Toast.makeText(this, email+"\n"+phoneNumber+"\n", Toast.LENGTH_SHORT).show();
+
                     }
                 });
 

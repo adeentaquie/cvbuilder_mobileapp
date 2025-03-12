@@ -9,4 +9,6 @@
     <string name="references">References</string>">
     <string name="mainactivitylogo">CV Builder</string>
     <string name="insertimage">Please enter an image by clicking on the image sign</string>
+    <string name="email">email</string>
+    <string name="phonenumber">phone number</string>
 </resources>
