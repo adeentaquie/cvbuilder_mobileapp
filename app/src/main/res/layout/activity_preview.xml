@@ -1,216 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="10dp"
     tools:context=".PreviewActivity">
 
     <RelativeLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ll_main">
-        <ImageView
-            android:id="@+id/profilepicture"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:background="@drawable/circle_background"
-            android:layout_centerHorizontal="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/profilepic" />
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabaddprofilepic"
+        android:orientation="vertical">
+
+        <!-- Profile Section -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ll_main">
+            <ImageView
+                android:id="@+id/profilepicture"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:background="@drawable/circle_background"
+                android:layout_centerHorizontal="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/profilepic" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabaddprofilepic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/profilepicture"
+                android:layout_toRightOf="@id/profilepicture"
+                android:src="@drawable/addpic"
+                tools:ignore="MissingConstraints" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profilepicture"
+                android:text="@string/name"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:textSize="20sp"
+                android:id="@+id/tvname"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvname"
+                android:text="@string/email"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/tvemail"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvemail"
+                android:text="@string/email"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/tvphonenumber"
+                />
+        </RelativeLayout>
+
+        <!-- Summary Section -->
+        <RelativeLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/ll1"
+            android:layout_below="@id/ll_main"
+            android:id="@+id/ll1"
+            android:layout_marginLeft="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/summary"
+                android:id="@+id/summaryText"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/summary"
+                android:layout_below="@id/summaryText"
+                android:layout_marginTop="5dp"
+                android:id="@+id/tvsummary"/>
+        </RelativeLayout>
+
+        <!-- Education Section -->
+        <RelativeLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/ll2"
+            android:layout_below="@id/ll1"
+            android:id="@+id/ll2"
+            android:layout_marginLeft="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/education"
+                android:id="@+id/educationtext"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/education"
+                android:layout_below="@id/educationtext"
+                android:layout_marginTop="5dp"
+                android:id="@+id/tveducation"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="From:"
+                android:layout_below="@id/tveducation"
+                android:layout_marginTop="5dp"
+                android:id="@+id/tveducationdatefrom"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="To:"
+                android:layout_below="@id/tveducationdatefrom"
+                android:layout_marginTop="5dp"
+                android:id="@+id/tveducationdateto"/>
+        </RelativeLayout>
+
+        <!-- Work Experience Section -->
+        <RelativeLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/ll3"
+            android:layout_below="@id/ll2"
+            android:id="@+id/ll3"
+            android:layout_marginLeft="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/workexperience"
+                android:id="@+id/experiencetext"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/experience"
+                android:layout_below="@id/experiencetext"
+                android:layout_marginTop="5dp"
+                android:id="@+id/tvorganizationname"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="From:"
+                android:layout_below="@id/tvorganizationname"
+                android:layout_marginTop="5dp"
+                android:id="@+id/tvorganizationdatefrom"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="To:"
+                android:layout_below="@id/tvorganizationdatefrom"
+                android:layout_marginTop="5dp"
+                android:id="@+id/tvorganizationdateto"/>
+        </RelativeLayout>
+
+        <!-- Certifications Section -->
+        <RelativeLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/ll4"
+            android:layout_below="@id/ll3"
+            android:id="@+id/ll4"
+            android:layout_marginLeft="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/certifications"
+                android:id="@+id/certificationtext"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/certifications"
+                android:layout_below="@id/certificationtext"
+                android:layout_marginTop="5dp"
+                android:id="@+id/tvcertifications"/>
+        </RelativeLayout>
+
+        <!-- Share CV Button -->
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/profilepicture"
-            android:layout_toRightOf="@id/profilepicture"
-            android:src="@drawable/addpic"
-            tools:ignore="MissingConstraints" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/profilepicture"
-            android:text="@string/name"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_centerHorizontal="true"
-            android:textSize="20sp"
-            android:id="@+id/tvname"
-            android:textStyle="bold"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvname"
-            android:text="@string/email"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/tvemail"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvemail"
-            android:text="@string/email"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/tvphonenumber"
-            />
+            android:id="@+id/sharecv"
+            android:text="Share CV"
+            android:layout_below="@id/ll4"
+            android:layout_centerHorizontal="true"/>
 
     </RelativeLayout>
-    <RelativeLayout
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/ll1"
-        android:layout_below="@id/ll_main"
-        android:id="@+id/ll1"
-        android:layout_marginLeft="10dp"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/summary"
-            android:id="@+id/summaryText"
-            android:textStyle="bold"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/summary"
-            android:layout_below="@id/summaryText"
-            android:layout_marginTop="5dp"
-            android:id="@+id/tvsummary"/>
-
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/ll2"
-        android:layout_below="@id/ll1"
-        android:id="@+id/ll2"
-        android:layout_marginLeft="10dp"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/education"
-            android:id="@+id/educationtext"
-            android:textStyle="bold"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/education"
-            android:layout_below="@id/educationtext"
-            android:layout_marginTop="5dp"
-            android:id="@+id/tveducation"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="From:"
-            android:layout_below="@id/tveducation"
-            android:layout_marginTop="5dp"
-            android:id="@+id/tveducationdatefrom"/>
-        <TextView
-            android:gravity="center"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/hyphen"
-            android:layout_below="@id/tveducationdatefrom"
-            android:id="@+id/hyphen1"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="To:"
-            android:layout_below="@id/hyphen1"
-            android:layout_marginTop="5dp"
-            android:id="@+id/tveducationdateto"/>
-
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/ll3"
-        android:layout_below="@id/ll2"
-        android:id="@+id/ll3"
-        android:layout_marginLeft="10dp"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/workexperience"
-            android:id="@+id/experiencetext"
-            android:textStyle="bold"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/experience"
-            android:layout_below="@id/experiencetext"
-            android:layout_marginTop="5dp"
-            android:id="@+id/tvorganizationname"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="From:"
-            android:layout_below="@id/tvorganizationname"
-            android:layout_marginTop="5dp"
-            android:id="@+id/tvorganizationdatefrom"/>
-        <TextView
-            android:gravity="center"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/hyphen"
-            android:layout_below="@id/tvorganizationdatefrom"
-            android:id="@+id/hyphen"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="To:"
-            android:layout_below="@id/hyphen"
-            android:layout_marginTop="5dp"
-            android:id="@+id/tvorganizationdateto"/>
-
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/ll4"
-        android:layout_below="@id/ll3"
-        android:id="@+id/ll4"
-        android:layout_marginLeft="10dp"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/certifications"
-            android:id="@+id/certificationtext"
-            android:textStyle="bold"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/certifications"
-            android:layout_below="@id/certificationtext"
-            android:layout_marginTop="5dp"
-            android:id="@+id/tvcertifications"/>
-
-
-    </RelativeLayout>
-
-
-</RelativeLayout>
-
+</ScrollView>
