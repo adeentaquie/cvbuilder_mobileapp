@@ -201,8 +201,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/sharecv"
-            android:text="Share CV"
+            android:id="@+id/btn_sharecv"
+            android:text="@string/sharecv"
             android:layout_below="@id/ll4"
             android:layout_centerHorizontal="true"/>
 

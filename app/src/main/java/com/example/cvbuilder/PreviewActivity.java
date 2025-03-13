@@ -1,8 +1,13 @@
 package com.example.cvbuilder;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -10,18 +15,23 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 public class PreviewActivity extends AppCompatActivity {
 
     // Declare TextViews and ImageView
     TextView tvname, tvemail, tvphonenumber, tvsummary, tvuniversity, tveducationdatesattendedfrom,
             tveducationdatesattendedto, tvorganizationdatesattendedfrom, tvorganizationdatesattendedto,
             tvorganization, tvcertification;
+    Button btn_sharecv;
 
     private ActivityResultLauncher<Intent> profilePictureLauncher;
     private FloatingActionButton fabAddProfilePic;  // FloatingActionButton to add profile picture
@@ -103,7 +113,75 @@ public class PreviewActivity extends AppCompatActivity {
                     }
                 }
         );
+
+        // Set up the share CV button click listener
+        btn_sharecv.setOnClickListener(v -> {
+            // Capture the screen as a Bitmap
+            Bitmap bitmap = captureScreen();
+
+            // Save the captured bitmap as an image file
+            File imageFile = saveImageToFile(bitmap);
+
+            if (imageFile != null) {
+                // Share the image file
+                shareFile(imageFile);
+            } else {
+                Toast.makeText(PreviewActivity.this, "Failed to capture screen", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
+    private Bitmap captureScreen() {
+        // Create a bitmap from the view hierarchy
+        Bitmap bitmap = Bitmap.createBitmap(findViewById(R.id.main).getWidth(),
+                findViewById(R.id.main).getHeight(), Bitmap.Config.ARGB_8888);
+
+        // Draw the view content into the bitmap
+        Canvas canvas = new Canvas(bitmap);
+        Drawable drawable = findViewById(R.id.main).getBackground();
+        if (drawable != null) {
+            drawable.draw(canvas);
+        }
+        findViewById(R.id.main).draw(canvas); // Draw the actual content
+
+        return bitmap;
+    }
+
+    private File saveImageToFile(Bitmap bitmap) {
+        File externalStorageDir = new File(getExternalFilesDir(null), "cv_image.png");
+
+        try (FileOutputStream fos = new FileOutputStream(externalStorageDir)) {
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);  // Save as PNG
+            fos.flush();
+            return externalStorageDir;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+    private void shareFile(File file) {
+        // Get the content URI for the file using FileProvider
+        Uri fileUri = FileProvider.getUriForFile(this, "com.example.cvbuilder.provider", file);
+
+        // Create an intent to share the image
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_STREAM, fileUri);  // Attach the file
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "Check out my CV!");  // Optional message
+        shareIntent.setType("image/png");  // MIME type for image (PNG)
+
+        // Use Intent.createChooser to allow the user to choose the app to share with (WhatsApp or Email)
+        Intent chooser = Intent.createChooser(shareIntent, "Share CV via");
+
+        // Check if the intent can be handled
+        if (shareIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(chooser);  // Let the user choose an app to share with
+        } else {
+            Toast.makeText(PreviewActivity.this, "No app available to share CV", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     // Initialize all the views
     private void init() {
@@ -120,5 +198,6 @@ public class PreviewActivity extends AppCompatActivity {
         tvcertification = findViewById(R.id.tvcertifications);
         profilepicture = findViewById(R.id.profilepicture);
         fabAddProfilePic = findViewById(R.id.fabaddprofilepic);  // Initialize the FloatingActionButton
+        btn_sharecv = findViewById(R.id.btn_sharecv);  // Initialize the Share CV button
     }
 }

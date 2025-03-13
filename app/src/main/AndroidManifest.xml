@@ -4,8 +4,11 @@
 
     <!-- Permissions for accessing external storage -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- WRITE_EXTERNAL_STORAGE is deprecated for Android 10 and higher, and is not needed in most cases -->
+    <!-- Remove WRITE_EXTERNAL_STORAGE for Android 10 (API 29) and higher, as Scoped Storage is used -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28" />
 
+    <!-- Application definition -->
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -20,7 +23,7 @@
         <!-- Define FileProvider for file access -->
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.cvbuilder.fileprovider"
+            android:authorities="com.example.cvbuilder.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
